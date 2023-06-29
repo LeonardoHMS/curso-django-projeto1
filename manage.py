@@ -3,10 +3,19 @@
 import os
 import sys
 
+from dotenv import load_dotenv
+
+# Create secret key
+# python -c
+# "import string as s;from random import SystemRandom as
+# sr;print(''.join(sr().choices(s.ascii_letters +
+# s.punctuation, k=64)))"
+
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
+    load_dotenv()
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
