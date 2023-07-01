@@ -38,8 +38,38 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['password2'], 'Repeat your password')
         add_attr(self.fields['username'], 'css', 'a-css-class')
 
+    first_name = forms.CharField(
+        error_messages={'required': 'Write your first name'},
+        label='First Name',
+    )
+
+    last_name = forms.CharField(
+        error_messages={'required': 'Write your last name'},
+        label='Last Name',
+    )
+
+    username = forms.CharField(
+        label='Username',
+        error_messages={
+            'required': 'This field must not be empty',
+            'min_length': 'Username must have at least 4 characters',
+            'max_length': 'Username must have less than 150 characaters',
+        },
+        help_text=(
+            'Username must have letters, numbers, or one of those @.+-_ '
+            'The length should be between 4 and 150 characters.'
+        ),
+        min_length=4, max_length=150,
+    )
+
+    email = forms.CharField(
+        error_messages={'required': 'E-mail is required'},
+        label='E-mail',
+        help_text='The e-mail must be valid.',
+    )
+
     password = forms.CharField(
-        required=True,
+        label='Password',
         widget=forms.PasswordInput(),
         error_messages={
             'required': 'Password must not be empty',
@@ -53,7 +83,9 @@ class RegisterForm(forms.ModelForm):
     )
 
     password2 = forms.CharField(
-        required=True,
+        error_messages={
+            'required': 'Confirm password must not be empty',
+        },
         widget=forms.PasswordInput(),
         label='Confirm Password',
     )
@@ -67,22 +99,6 @@ class RegisterForm(forms.ModelForm):
             'email',
             'password',
         ]
-        labels = {
-            'first_name': 'First Name',
-            'last_name': 'Last Name',
-            'username': 'Username',
-            'email': 'E-mail',
-            'password': 'Password',
-        }
-        help_texts = {
-            'email': 'The e-mail must be valid.'
-        }
-        error_messages = {
-            'username': {
-                'required': 'This field must not be empty',
-            }
-        }
-
     # Validation
 
     def clean(self):
