@@ -87,8 +87,8 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         response = self.client.post(
             url, data=self.form_data, follow=True)  # follow=Redirect
         msg = 'Username must have at least 4 characters'
-        self.assertIn(msg, response.content.decode('utf-8'))
         self.assertIn(msg, response.context['form'].errors.get('username'))
+        self.assertIn(msg, response.content.decode('utf-8'))
 
     def test_username_field_max_length_should_be_150(self):
         self.form_data['username'] = 'a' * 151
@@ -96,5 +96,60 @@ class AuthorRegisterFormIntegrationTest(DjangoTestCase):
         response = self.client.post(
             url, data=self.form_data, follow=True)  # follow=Redirect
         msg = 'Username must have less than 150 characaters'
-        self.assertIn(msg, response.content.decode('utf-8'))
         self.assertIn(msg, response.context['form'].errors.get('username'))
+        self.assertIn(msg, response.content.decode('utf-8'))
+
+    def test_password_field_have_lower_upper_case_letters_and_numbers(self):
+        self.form_data['password'] = 'bc123'
+        url = reverse('authors:create')
+        response = self.client.post(
+            url, data=self.form_data, follow=True)  # follow=Redirect
+        msg = (
+            'Password must have at least one uppercase letter, '
+            'one lowercase letter and one number. The length should be '
+            'at least 8 characters.'
+        )
+        self.assertIn(msg, response.context['form'].errors.get('password'))
+        self.assertIn(msg, response.content.decode('utf-8'))
+
+        self.form_data['password'] = '@Abcd123456'
+        url = reverse('authors:create')
+        response = self.client.post(
+            url, data=self.form_data, follow=True)  # follow=Redirect
+
+        self.assertNotIn(msg, response.context['form'].errors.get('password'))
+
+    def test_password_and_password_confirmation_are_equal(self):
+        self.form_data['password'] = '@Abc123456'
+        self.form_data['password2'] = '@Abc1234567'
+        url = reverse('authors:create')
+        response = self.client.post(
+            url, data=self.form_data, follow=True)  # follow=Redirect
+        msg = (
+            'Password and password2 must be equal'
+        )
+        self.assertIn(msg, response.context['form'].errors.get('password'))
+        self.assertIn(msg, response.content.decode('utf-8'))
+
+        self.form_data['password'] = '@Abc123456'
+        self.form_data['password2'] = '@Abc123456'
+        url = reverse('authors:create')
+        response = self.client.post(
+            url, data=self.form_data, follow=True)  # follow=Redirect
+        self.assertNotIn(msg, response.content.decode('utf-8'))
+
+    def test_send_get_request_to_registration_create_view_returns_404(self):
+        url = reverse('authors:create')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_email_field_must_be_unique(self):
+        url = reverse('authors:create')
+        self.client.post(url, data=self.form_data,
+                         follow=True)  # follow=Redirect
+
+        response = self.client.post(url, data=self.form_data, follow=True)
+        msg = 'User e-mail is already in use'
+
+        self.assertIn(msg, response.context['form'].errors.get('email'))
+        self.assertIn(msg, response.content.decode('utf-8'))
