@@ -1,16 +1,12 @@
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from .base import AuthorsBaseTest
 
 
+@pytest.mark.functional_test
 class AuthorsRegisterTest(AuthorsBaseTest):
-    def get_by_placeholder(self, web_element, placeholder):
-        return web_element.find_element(
-            By.XPATH,
-            f'//input[@placeholder="{placeholder}"]'
-        )
-
     def fill_form_dummy_data(self, form):
         fields = form.find_elements(By.TAG_NAME, 'input')
 
@@ -80,10 +76,12 @@ class AuthorsRegisterTest(AuthorsBaseTest):
             self.assertIn('Password and password2 must be equal', form.text)
         self.form_field_test_with_callback(callback)
 
-    def test_user_valid_data_register_sucessfully(self):
+    def test_user_valid_data_register_successfully(self):
+        # Usuário abre a página de registro
         self.browser.get(self.live_server_url + '/authors/register/')
         form = self.get_form()
 
+        # Usuário preenche os campos do formulário
         self.get_by_placeholder(form, 'Ex.: Leonardo').send_keys('First_name')
         self.get_by_placeholder(form, 'Ex.: Mantovani').send_keys('Last_name')
         self.get_by_placeholder(form, 'Your Username').send_keys('Username')
@@ -93,8 +91,10 @@ class AuthorsRegisterTest(AuthorsBaseTest):
         self.get_by_placeholder(
             form, 'Repeat your password').send_keys('P@ssw0rd')
 
+        # Usuário envia o formulário
         form.submit()
 
+        # Usuário vê a mensagem de conta criada com sucesso
         self.assertIn(
             'Your user is created, please log in.',
             self.browser.find_element(By.TAG_NAME, 'body').text

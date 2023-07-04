@@ -1,5 +1,3 @@
-import time
-
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 from recipes.tests.test_recipe_base import RecipeMixing
@@ -14,6 +12,3 @@ class RecipeBaseFunctionalTest(StaticLiveServerTestCase, RecipeMixing):
     def tearDown(self) -> None:
         self.browser.quit()
         return super().tearDown()
-
-    def sleep(self, seconds=5):
-        time.sleep(seconds)
