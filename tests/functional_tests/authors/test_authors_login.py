@@ -33,7 +33,7 @@ class AuthorsLoginTest(AuthorsBaseTest):
 
         # Usuário vê a mensagem de login com sucesso e seu nome
         self.assertIn(
-            'Your are logged in with user_test. Please, click here to logout.',
+            'Your are logged in with user_test. See your recipes, create a new recipe or click here to logout.',  # noqa E501
             self.browser.find_element(By.TAG_NAME, 'body').text
         )
 
