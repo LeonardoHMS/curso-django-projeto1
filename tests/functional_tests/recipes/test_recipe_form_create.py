@@ -217,9 +217,8 @@ class RecipeTestFormCreate(RecipeBaseFunctionalTest):
 
         # Usuário envia o formulário
         form.submit()
-
         # Usuário vê a mensagem de receita criada com sucesso
         self.assertIn(
-            'Sua receita foi criada com sucesso!',
+            'Sua receita foi salva com sucesso!',
             self.browser.find_element(By.TAG_NAME, 'body').text
         )
