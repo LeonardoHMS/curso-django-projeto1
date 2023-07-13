@@ -6,7 +6,7 @@ from utils.browser import make_edge_browser
 
 class AuthorsBaseTest(StaticLiveServerTestCase):
     def setUp(self) -> None:
-        self.browser = make_edge_browser()
+        self.browser = make_edge_browser('--disabled-extensions')
         return super().setUp()
 
     def tearDown(self) -> None:

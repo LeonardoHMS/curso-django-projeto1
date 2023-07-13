@@ -7,6 +7,7 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 def make_edge_browser(*options):
     edge_options = webdriver.EdgeOptions()
+    edge_options.add_experimental_option('excludeSwitches', ['enable-logging'])
     service = Service(EdgeChromiumDriverManager().install())
 
     if options is not None:
