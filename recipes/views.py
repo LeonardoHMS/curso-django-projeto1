@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.forms.models import model_to_dict
 from django.http import JsonResponse
 from django.http.response import Http404
+from django.utils import translation
+from django.utils.translation import gettext as _
 from django.views.generic import DetailView, ListView
 
 from tag.models import Tag
@@ -27,7 +29,7 @@ class RecipeListViewBase(ListView):
             is_published=True,
         )
         qs = qs.select_related('author', 'category')
-        qs = qs.prefetch_related('tags')
+        qs = qs.prefetch_related('tags', 'author__profile')
         return qs
 
     def get_context_data(self, *args, **kwargs):
@@ -37,9 +39,12 @@ class RecipeListViewBase(ListView):
             ctx.get('recipes'),
             PER_PAGE
         )
-        ctx.update(
-            {'recipes': page_obj, 'pagination_range': pagination_range}
-        )
+        html_language = translation.get_language()
+        ctx.update({
+            'recipes': page_obj,
+            'pagination_range': pagination_range,
+            'html_language': html_language,
+        })
         return ctx
 
 
@@ -74,6 +79,7 @@ class RecipeListViewCategory(RecipeListViewBase):
 
     def get_context_data(self, *args, **kwargs):
         ctx = super().get_context_data(*args, **kwargs)
+        category_translation = _('Category')
         page_obj, pagination_range = make_pagination(
             self.request,
             ctx.get('recipes'),
@@ -83,7 +89,7 @@ class RecipeListViewCategory(RecipeListViewBase):
         ctx.update({
             'recipes': page_obj,
             'pagination_range': pagination_range,
-            'title': f'{title} - Category |'
+            'title': f'{title} - {category_translation} |'
         })
         return ctx
 

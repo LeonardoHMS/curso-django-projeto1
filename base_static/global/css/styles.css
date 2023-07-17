@@ -194,6 +194,10 @@ a {
     padding: 0 var(--spacing-gutter-medium);
 }
 
+.recipe-author p {
+    margin-top: 1rem;
+}
+
 .recipe-content {
     padding: var(--spacing-gutter-medium);
     padding-top: 2rem;
@@ -539,6 +543,26 @@ a {
 .menu-nav a {
     width: fit-content;
     padding: 1rem;
+}
+
+.profile-container {
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.profile-container p {
+    padding: 1rem;
+}
+
+.profile-container img {
+    border-radius: 50%;
 }
 
 @media (max-width: 600px) {

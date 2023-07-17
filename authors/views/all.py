@@ -10,6 +10,8 @@ from recipes.models import Recipe
 
 
 def register_view(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('authors:login'))
     register_form_data = request.session.get('register_form_data', None)
     form = RegisterForm(register_form_data)
     return render(request, 'authors/pages/register_view.html', context={

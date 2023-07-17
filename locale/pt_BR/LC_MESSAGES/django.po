@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-07-17 11:46-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\authors\models.py:12 .\recipes\models.py:55
+msgid "Author"
+msgstr "Autor"
+
+#: .\authors\models.py:15
+msgid "Gender"
+msgstr "Gênero"
+
+#: .\authors\models.py:20 .\recipes\models.py:47
+msgid "Cover"
+msgstr "Imagem"
+
+#: .\authors\models.py:24
+msgid "Date of birth"
+msgstr "Data de nascimento"
+
+#: .\authors\models.py:28
+msgid "Profile"
+msgstr "Perfil"
+
+#: .\authors\models.py:29
+msgid "Profiles"
+msgstr "Perfis"
+
+#: .\authors\templates\authors\pages\profile.html:16
+msgid "My recipes"
+msgstr "Minhas Receitas"
+
+#: .\base_templates\global\partials\search.html:5
+msgid "Search for a recipe"
+msgstr "Procurar uma receita"
+
+#: .\recipes\models.py:14
+msgid "Name"
+msgstr "Nome"
+
+#: .\recipes\models.py:20 .\recipes\models.py:52 .\recipes\views.py:82
+msgid "Category"
+msgstr "Categoria"
+
+#: .\recipes\models.py:21
+msgid "Categories"
+msgstr "Categorias"
+
+#: .\recipes\models.py:25
+msgid "Title"
+msgstr "Título"
+
+#: .\recipes\models.py:27
+msgid "Description"
+msgstr "Descrição"
+
+#: .\recipes\models.py:29
+msgid "Preparation time"
+msgstr "Tempo de preparo"
+
+#: .\recipes\models.py:31
+msgid "Preparation time unit"
+msgstr "Unidade de tempo"
+
+#: .\recipes\models.py:32 .\recipes\templates\recipes\partials\recipe.html:60
+msgid "Servings"
+msgstr "Porções"
+
+#: .\recipes\models.py:34
+msgid "Servings unit"
+msgstr "Tipo de porções"
+
+#: .\recipes\models.py:35
+msgid "Preparation steps"
+msgstr "Modo de preparo"
+
+#: .\recipes\models.py:37
+msgid "Preparation steps is html"
+msgstr "Modo de preparo está em html"
+
+#: .\recipes\models.py:39
+#, fuzzy
+#| msgid "created_at"
+msgid "Created at"
+msgstr "Criado em"
+
+#: .\recipes\models.py:41
+#, fuzzy
+#| msgid "update_at"
+msgid "Update at"
+msgstr "Atualizado em"
+
+#: .\recipes\models.py:43
+msgid "Is published"
+msgstr "Está públicado"
+
+#: .\recipes\models.py:88
+msgid "Recipe"
+msgstr "Receita"
+
+#: .\recipes\models.py:89
+msgid "Recipes"
+msgstr "Receitas"
+
+#: .\recipes\templates\recipes\partials\recipe.html:35
+msgid "at"
+msgstr "às"
+
+#: .\recipes\templates\recipes\partials\recipe.html:54
+msgid "Preparation"
+msgstr "Preparo"
+
+#: .\recipes\templates\recipes\partials\recipe.html:71
+msgid "Read more"
+msgstr "Ler mais"

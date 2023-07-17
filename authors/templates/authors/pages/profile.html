@@ -1,0 +1,24 @@
+{% extends 'global/base.html' %}
+{% load i18n %}
+
+{% block title %}Profile |{% endblock title %}
+
+{% block content %}
+    <div class="main-content center container">
+        <h2>{{ profile.author.username }}</h2>
+        <div class="profile-container">
+                {% if profile.cover %}
+                    <img src="{{ profile.cover.url }}" alt="image_profile">
+                {% endif %}
+                <p>{{ profile.gender }}</p>
+                <p>{{ profile.date_of_birth|date:"d/m/Y" }}</p>
+            <p>{{ profile.bio }}</p>
+            <h2>{% translate "My recipes" %}</h2>
+        </div>
+        <div class="main-content main-content-list container">
+            {% for recipe in recipes %}
+                {% include 'recipes/partials/recipe.html' %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

@@ -8,6 +8,15 @@
         {% include 'authors/partials/login_message.html' %}
         {% include 'global/partials/messages.html' %}
         <div class="authors-dashboard-container">
+        {% if recipes.0.author.profile %}
+            <a href="{% url 'authors:profile' recipes.0.author.profile.id %}">
+                <h3>Your profile</h3>
+            </a>
+        {% else %}
+            <a href="#">
+                <h3>Create your profile</h3>
+            </a>
+        {% endif %}
             <h3>Your Recipes</h3>
             <ul>
                 {% for recipe in recipes %}
