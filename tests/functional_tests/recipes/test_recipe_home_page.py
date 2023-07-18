@@ -27,7 +27,7 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
         # Vê um campo de busca com o texto 'Search for a recipe
         search_input = self.browser.find_element(
             By.XPATH,
-            '//input[@placeholder="Search for a recipe..."]'
+            '//input[@placeholder="Procurar uma receita..."]'
         )
 
         # clica neste input e digita o termo de busca
@@ -41,7 +41,7 @@ class RecipeHomePageFunctionalTest(RecipeBaseFunctionalTest):
             self.browser.find_element(By.CLASS_NAME, 'main-content-list').text,
         )
 
-    @patch('recipes.views.PER_PAGE', new=2)
+    @patch('recipes.views.site.PER_PAGE', new=2)
     def test_recipe_home_page_pagination(self):
         self.make_recipe_in_batch()
 

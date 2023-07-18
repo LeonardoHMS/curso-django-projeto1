@@ -5,6 +5,8 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import F, Value
+from django.db.models.functions import Concat
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
@@ -24,7 +26,24 @@ class Category(models.Model):
         verbose_name_plural = _('Categories')
 
 
+class RecipeManager(models.Manager):
+    def get_published(self):
+        return self.filter(
+            is_published=True
+        ).annotate(
+            author_full_name=Concat(
+                F('author__first_name'), Value(' '),
+                F('author__last_name'), Value(' ('),
+                F('author__username'), Value(')'),
+            )
+        ) \
+            .order_by('-id') \
+            .select_related('category', 'author') \
+            .prefetch_related()
+
+
 class Recipe(models.Model):
+    objects = RecipeManager()
     title = models.CharField(max_length=65, verbose_name=_('Title'))
     description = models.CharField(
         max_length=165, verbose_name=_('Description'))
