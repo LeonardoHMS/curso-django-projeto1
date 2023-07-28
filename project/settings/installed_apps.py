@@ -7,8 +7,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Django cors
+    'corsheaders',
+    # Django rest framework
     'rest_framework',
     'rest_framework_simplejwt',
+    # My apps
     'recipes',
     'authors',
     'tag',
